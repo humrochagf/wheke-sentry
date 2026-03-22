@@ -10,7 +10,9 @@ class SentryService:
 
     def __init__(self, *, settings: SentrySettings) -> None:
         self.settings = settings
-        sentry_sdk.init(dsn=settings.dsn, send_default_pii=True)
+
+        if settings.dsn:
+            sentry_sdk.init(dsn=settings.dsn, send_default_pii=True)
 
 
 def sentry_service_factory(container: Container) -> SentryService:
